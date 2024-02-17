@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33712.159
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "parser selenium", "parser selenium\parser selenium.csproj", "{26B5EB63-59EB-4E65-AB4B-0EE724F19F6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{26B5EB63-59EB-4E65-AB4B-0EE724F19F6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26B5EB63-59EB-4E65-AB4B-0EE724F19F6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26B5EB63-59EB-4E65-AB4B-0EE724F19F6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26B5EB63-59EB-4E65-AB4B-0EE724F19F6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A95C031E-BC01-4127-8860-D44DE19543B7}
+	EndGlobalSection
+EndGlobal
