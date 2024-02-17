@@ -21,6 +21,7 @@ internal class Program
             Console.WriteLine("\n\n\n" + a);
             int k = 0;
             double c = 0;
+            //n2
             bool flag = true;
             for (int i = 0; i < a.Length; i++)
             {
