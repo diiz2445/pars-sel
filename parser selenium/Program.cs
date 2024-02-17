@@ -20,7 +20,6 @@ internal class Program
             Console.WriteLine(inf.Text);
             Console.WriteLine("\n\n\n" + a);
             int k = 0;
-            //adada
             double c = 0;
             bool flag = true;
             for (int i = 0; i < a.Length; i++)
