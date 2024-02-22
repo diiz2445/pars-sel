@@ -20,18 +20,29 @@ namespace parser_selenium
             names = new Dictionary<string, int>();
         }
 
-        public static void b()
+        public void b()
         {
-            IWebDriver driver = new ChromeDriver();
+            IWebDriver driver = new EdgeDriver();
             driver.Manage().Window.Minimize();
             driver.Url = "https://buff.163.com/market/csgo";
             List<IWebElement> elements = driver.FindElements(By.XPath("//*[@id=\"j_list_card\"]/ul/li/h3/a")).ToList();
-            List<IWebElement> codes = driver.FindElements(By.XPath("//*[@id=\"j_list_card\"]/ul/li/h3")).ToList();
-
-            foreach (IWebElement element in codes)
+            
+            foreach (IWebElement element in elements)
             {
                 Console.WriteLine(element.Text);
                 Console.WriteLine(element.GetAttribute("href"));
+
+                string[] href = element.GetAttribute("href").Split('/', '?');
+                foreach(string str in href)
+                {
+                    try
+                    {
+                        names.Add(element.Text, int.Parse(str));
+                    }
+                    catch
+                    { }
+                }
+
             }
         }
         

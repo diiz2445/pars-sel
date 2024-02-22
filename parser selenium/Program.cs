@@ -45,8 +45,8 @@ namespace parser_selenium
             //Console.WriteLine();
             //driver.Close();
 
-
-            Class_for_parse_names.b();
+            Class_for_parse_names parse_names = new Class_for_parse_names();
+            parse_names.b();
             Console.ReadLine();
         }
     }
