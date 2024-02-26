@@ -31,25 +31,39 @@ namespace parser_selenium
             List<IWebElement> elements = driver.FindElements(By.XPath("//*[@id=\"j_list_card\"]/ul/li/h3/a")).ToList();
             try { names = deserialize(); Console.WriteLine("начальная сер пройдено"); }
             catch { }
-            foreach (IWebElement element in elements)
+            while (true)
             {
-                Console.WriteLine(element.Text);
-                Console.WriteLine(element.GetAttribute("href"));
-
-                string[] href = element.GetAttribute("href").Split('/', '?');
-                foreach(string str in href)
+                foreach (IWebElement element in elements)
                 {
-                    try
+                    Console.WriteLine(element.Text);
+                    Console.WriteLine(element.GetAttribute("href"));
+                    string[] nameA = element.Text.Split(' ');
+                    string name = "";
+                    
+                    for (int i = 0 ; i<nameA.Length; i++)
                     {
-                        names.Add(element.Text, int.Parse(str));
-                        Console.WriteLine("добавлен");
+                        if (nameA[i] != "|" && (!nameA[i].Contains('('))&& nameA[i] != "|" && (!nameA[i].Contains(')')))
+                            name += nameA[i]+" ";
                     }
-                    catch(Exception e)
-                    { Console.WriteLine(e.Message); }
+                    name = name.TrimEnd();
+                    Console.WriteLine(name);
+                    string[] href = element.GetAttribute("href").Split('/', '?');
+                    
+                        try
+                        {
+                            names.Add(name, int.Parse(href[4]));
+                            Console.WriteLine("добавлен");
+                        }
+                        catch (Exception e)
+                        {  }
+                    
+
                 }
-                
+                serialize();
+                Thread.Sleep(1000);
+                driver.Close();
+               
             }
-            serialize();
         }
         public void serialize()
         {

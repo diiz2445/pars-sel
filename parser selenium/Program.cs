@@ -11,7 +11,6 @@ namespace parser_selenium
             Class_for_parse_names parse_names = new Class_for_parse_names();
             parse_names.b();
 
-            Dictionary<string, int> x = Class_for_parse_names.deserialize();
             Console.ReadLine();
         }
     }
