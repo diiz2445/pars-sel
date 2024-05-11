@@ -8,11 +8,16 @@ namespace parser_selenium
         private static void Main(string[] args)
         {
 
-            Class_for_parse_names parse_names = new Class_for_parse_names();
-            parse_names.b();
+            //Class_for_parse_names parse_names = new Class_for_parse_names();
+            //parse_names.b();
 
-            Dictionary<string, int> x = Class_for_parse_names.deserialize();
-            Console.ReadLine();
+            //Dictionary<string, int> x = Class_for_parse_names.deserialize();
+            //Console.ReadLine();
+
+
+            ParseCsMoney parseCsMoney = new ParseCsMoney();
+            parseCsMoney.GetNames();
+
         }
     }
 }
