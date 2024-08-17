@@ -27,8 +27,15 @@ namespace parser_selenium
             //driver.Url = "https://wiki.cs.money/weapons/ak-47";
             driver.Url = "https://wiki.cs.money";
             //IWebElement el = driver.FindElement(By.XPath("//*[@id=\"skins\"]/div[2]/div[2]/div/div[1]/div/a/div[2]"));
+            IWebElement[] ShowAllClick = driver.FindElements(By.ClassName("zydijptxtdznttzttbpqclfdht")).ToArray();
 
-            string[] type = driver.FindElement(By.XPath("//*[@id=\"skins\"]/div[1]/div[1]/div[2]")).Text.Split("\r\n");
+            for (int i = 0; i < 5; i++)
+            {
+                ShowAllClick[i].Click();
+            }
+
+            IReadOnlyList<IWebElement> els = driver.FindElements(By.TagName("href"));
+            string[] type = driver.FindElement(By.XPath("//*[@id=\"skins\"]/div[1]/div[2]/div[1]/a")).Text.Split("");
             
             Console.WriteLine(type);
             
