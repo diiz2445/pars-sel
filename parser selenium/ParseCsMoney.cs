@@ -22,16 +22,16 @@ namespace parser_selenium
         }
         public void GetNames()
         {
-            //var options = new ChromeOptions();
-            //options.AddArgument("--ignore-certificate-errors");
-            //options.AddArgument("--ignore-ssl-errors");
-            IWebDriver driver = new EdgeDriver();
+            IWebDriver driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
-            //driver.Manage().Window.Minimize();
-            driver.Url = "https://wiki.cs.money/weapons/ak-47";
-            List<IWebElement> elements = driver.FindElements(By.ClassName("kxmatkcipwonxvwweiqqdoumxg")).ToList();
-            //try { _Names = deserialize(); Console.WriteLine("начальная сер пройдено"); }
-            //catch { }
+            //driver.Url = "https://wiki.cs.money/weapons/ak-47";
+            driver.Url = "https://wiki.cs.money";
+            //IWebElement el = driver.FindElement(By.XPath("//*[@id=\"skins\"]/div[2]/div[2]/div/div[1]/div/a/div[2]"));
+
+            string[] type = driver.FindElement(By.XPath("//*[@id=\"skins\"]/div[1]/div[1]/div[2]")).Text.Split("\r\n");
+            
+            Console.WriteLine(type);
+            
 
 
         }

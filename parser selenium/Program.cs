@@ -16,9 +16,11 @@ namespace parser_selenium
 
 
             ParseCsMoney parseCsMoney = new ParseCsMoney();
-            parseCsMoney.GetNames();
-
+            //parseCsMoney.GetNames();
+            DB dB = new DB();
+            dB.AddItemTypes("Knives", "★ Karambit");
             Console.ReadLine();
+
         }
     }
 }
