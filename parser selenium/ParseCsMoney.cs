@@ -22,24 +22,38 @@ namespace parser_selenium
         }
         public void GetNames()
         {
+            int i;
             IWebDriver driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             //driver.Url = "https://wiki.cs.money/weapons/ak-47";
             driver.Url = "https://wiki.cs.money";
-            //IWebElement el = driver.FindElement(By.XPath("//*[@id=\"skins\"]/div[2]/div[2]/div/div[1]/div/a/div[2]"));
-            IWebElement[] ShowAllClick = driver.FindElements(By.ClassName("zydijptxtdznttzttbpqclfdht")).ToArray();
 
-            for (int i = 0; i < 5; i++)
             {
-                ShowAllClick[i].Click();
+                IWebElement[] ShowAllClick = driver.FindElements(By.ClassName("zydijptxtdznttzttbpqclfdht")).ToArray();
+
+                for (i = 0; i < 5; i++)
+                {
+                    ShowAllClick[i].Click();
+                }
             }
+            IWebElement[] names = driver.FindElements(By.ClassName("yuevqsquaveulqpticinqpvght")).ToArray();
+            string[,] info = new string[100,4];
+            IWebElement[] href = driver.FindElements(By.ClassName("itixalfiylvsvmdssbpcdzfawb")).ToArray();
+            string[] qq = new string[names.Length];
+            IWebElement[] hf = new IWebElement[names.Length];
+            for(int j=0; j<names.Length; j++)
+                for(i=0;i<30;i++)
+                {
+                    try
+                    {
+                        hf[i] = driver.FindElement(By.XPath($"//*[@id=\"skins\"]/div[{j}]/div[2]/div[{i + 1}]/a"));
+                        Console.WriteLine($"name: {hf[i].Text}\nhf = {hf[i].GetAttribute("href")}");
+                    }
+                    catch { }
+                }
 
-            IReadOnlyList<IWebElement> els = driver.FindElements(By.TagName("href"));
-            string[] type = driver.FindElement(By.XPath("//*[@id=\"skins\"]/div[1]/div[2]/div[1]/a")).Text.Split("");
+            i = 0;
             
-            Console.WriteLine(type);
-            
-
 
         }
         public void ParseUrl()
