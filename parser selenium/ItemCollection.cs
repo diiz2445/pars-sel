@@ -11,5 +11,16 @@ namespace parser_selenium
     {
         [JsonProperty("items")]
         public Dictionary<string, Item> Items { get; set; }
+
+        public void print()
+        {
+            foreach (var item in Items)
+            {
+                Console.WriteLine(item.Key + item.Value.Buff163GoodsId.ToString());
+            }
+        }
+        
     }
+
+    
 }

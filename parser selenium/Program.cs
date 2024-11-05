@@ -24,7 +24,10 @@ namespace parser_selenium
             string json = System.IO.File.ReadAllText("cs2_marketplaceids.json");
             Console.WriteLine("readed");
             ItemCollection itemCollection = JsonConvert.DeserializeObject<ItemCollection>(json);
+            itemCollection.print();
+            
             Console.ReadLine();
+
 
         }
     }
