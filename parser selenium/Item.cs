@@ -17,5 +17,9 @@ namespace parser_selenium
 
         [JsonProperty("buff163_sticker_id", NullValueHandling = NullValueHandling.Ignore)]
         public int? Buff163StickerId { get; set; }
+
+        public String Name { get; set; }
+        public String type { get; set; }
     }
+    
 }
