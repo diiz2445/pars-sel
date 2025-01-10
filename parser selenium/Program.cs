@@ -10,21 +10,7 @@ namespace parser_selenium
     {
         private static void Main(string[] args)
         {
-            List<string> Types = new List<string>
-            {
-                "Sticker",
-                "Knive",
-                "Glove",
-                "Rifle",
-                "Pistol",
-                "SMG",
-                "Shotgun",
-                "Machinegun",
-                "Agent",
-                "Case",
-                "Key",
-                "Other"
-            };
+
             //Class_for_parse_names parse_names = new Class_for_parse_names();
             //parse_names.b();
 
@@ -41,7 +27,7 @@ namespace parser_selenium
 
             //itemCollection.print();
 
-
+            Thread.Sleep(100);
             ItemCollection itemCollection = ItemCollection.GetCollection();
             Console.ReadLine();
 

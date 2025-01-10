@@ -9,7 +9,7 @@ namespace parser_selenium
     public class All_Info
     {
 
-        List<string> Types = new List<string>
+        public static  List<string> Types = new List<string>
             {
                 "Sticker",
                 "Knife",
@@ -24,12 +24,12 @@ namespace parser_selenium
                 "Key",
                 "Other"
             };
-        Dictionary<string, string> Name_Type = new Dictionary<string, string>
+        public static Dictionary<string, string> Name_Type = new Dictionary<string, string>
         {
             {"Nova","Shotgun" },
             {"XM1014","Shotgun" },
             {"MAG-7","Shotgun" },
-            {"Sawed off","Shotgun" },
+            {"Sawed-off","Shotgun" },
 
             {"M249","Machinegun" },
             {"Negev","Machinegun" },
@@ -47,7 +47,7 @@ namespace parser_selenium
             {"G3SG1","Rifle"},
 
             {"Butterfly","Knife"},
-            {"M9 Bayonet","Knife"},
+            {"★ M9 Bayonet","Knife"},
             {"Karambit","Knife"},
             {"Kukri","Knife"},
             {"Bayonet","Knife"},
@@ -84,9 +84,11 @@ namespace parser_selenium
             {"Five-SeveN","Pistol"},
             {"R8 Revolver","Pistol"},
             {"Tec-9","Pistol"},
-            {"Dual Berettas","Pistol"},
+            {"Dual","Pistol"},//переделать
+            {"Berettas","Pistol"},
+
             {"CZ75-Auto","Pistol"},
-            {"Zeus x27","Pistol"},
+            {"Zeus","Pistol"},
 
             {"MP9","SMG"},
             {"MAC-10","SMG"},
@@ -94,7 +96,10 @@ namespace parser_selenium
             {"P90","SMG"},
             {"MP7","SMG"},
             {"PP-Bizon","SMG"},
-            {"MP5-SD","SMG"}
+            {"MP5-SD","SMG"},
+
+            {"Sticker","Sticker" },
+            {"Case","Case" }
         };
 
 
