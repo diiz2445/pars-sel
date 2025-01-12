@@ -10,28 +10,25 @@ namespace parser_selenium
     {
         private static void Main(string[] args)
         {
-
-            //Class_for_parse_names parse_names = new Class_for_parse_names();
-            //parse_names.b();
-
-            //Dictionary<string, int> x = Class_for_parse_names.deserialize();
-            //Console.ReadLine();
-
-
-            //ParseCsMoney parseCsMoney = new ParseCsMoney();
-            //parseCsMoney.GetNames();
-            //DB dB = new DB();
-            //string json = System.IO.File.ReadAllText("cs2_marketplaceids.json");
-            //Console.WriteLine("readed");
-            //ItemCollection itemCollection = JsonConvert.DeserializeObject<ItemCollection>(json);
-
-            //itemCollection.print();
-
-            Thread.Sleep(100);
             ItemCollection itemCollection = ItemCollection.GetCollection();
-            Console.ReadLine();
+            
+
+            foreach (var item in itemCollection.Items)//проверка наличия у всех предметов 
+            {
+                if(item.Value.type ==null)
+                    Console.WriteLine("Error: "+item.Value.Name);
+            }
+
+            ItemCollection OtherCollection = itemCollection.GetItemsWhereTypeIs("Other");//проверка, чтобы не было лишних Other  в типе предмета
+            foreach (var item in OtherCollection.Items)
+            {
+                Console.WriteLine(item.Key);
+            } 
+            Console.WriteLine("Done");
 
 
+
+            Console.ReadLine();//ожидание, чтобы не выйти из отладки
         }
     }
 }

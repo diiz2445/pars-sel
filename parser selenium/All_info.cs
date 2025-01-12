@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace parser_selenium
 {
+
     public class All_Info
     {
 
-        public static  List<string> Types = new List<string>
+        public static List<string> Types = new List<string>
             {
                 "Sticker",
                 "Knife",
@@ -22,14 +23,16 @@ namespace parser_selenium
                 "Agent",
                 "Case",
                 "Key",
+                "Graffiti",
                 "Other"
             };
+    
         public static Dictionary<string, string> Name_Type = new Dictionary<string, string>
         {
             {"Nova","Shotgun" },
             {"XM1014","Shotgun" },
             {"MAG-7","Shotgun" },
-            {"Sawed-off","Shotgun" },
+            {"Sawed-Off","Shotgun" },
 
             {"M249","Machinegun" },
             {"Negev","Machinegun" },
@@ -47,7 +50,7 @@ namespace parser_selenium
             {"G3SG1","Rifle"},
 
             {"Butterfly","Knife"},
-            {"★ M9 Bayonet","Knife"},
+            {"M9 Bayonet","Knife"},
             {"Karambit","Knife"},
             {"Kukri","Knife"},
             {"Bayonet","Knife"},
@@ -57,12 +60,12 @@ namespace parser_selenium
             {"Flip","Knife"},
             {"Stiletto","Knife"},
             {"Classic","Knife"},
-            {"Urus","Knife"},
+            {"Ursus","Knife"},
             {"Huntsman","Knife"},
             {"Paracord","Knife"},
             {"Survival","Knife"},
             {"Falchion","Knife"},
-            {"Shadow Dagger","Knife"},
+            {"Shadow Daggers","Knife"},
             {"Bowie","Knife"},
             {"Gut","Knife"},
             {"Navaja","Knife"},
@@ -84,8 +87,8 @@ namespace parser_selenium
             {"Five-SeveN","Pistol"},
             {"R8 Revolver","Pistol"},
             {"Tec-9","Pistol"},
-            {"Dual","Pistol"},//переделать
-            {"Berettas","Pistol"},
+            {"Dual Berettas","Pistol"},
+            
 
             {"CZ75-Auto","Pistol"},
             {"Zeus","Pistol"},
@@ -99,7 +102,8 @@ namespace parser_selenium
             {"MP5-SD","SMG"},
 
             {"Sticker","Sticker" },
-            {"Case","Case" }
+            {"Case","Case" },
+            {"Sealed Graffiti","Graffiti" }
         };
 
 
