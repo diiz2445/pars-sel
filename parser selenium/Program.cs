@@ -1,8 +1,11 @@
 ﻿using Newtonsoft.Json;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
+using System.Net;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using parser_selenium.Core.steam_market;
+using System.Runtime.Serialization;
 
 namespace parser_selenium
 {
@@ -24,11 +27,16 @@ namespace parser_selenium
             string json = System.IO.File.ReadAllText("cs2_marketplaceids.json");
             Console.WriteLine("readed");
             ItemCollection itemCollection = JsonConvert.DeserializeObject<ItemCollection>(json);
-            itemCollection.print();
+            //itemCollection.print();
             
+
+            WebRequest request = WebRequest.Create("https://www.steamwebapi.com/steam/api/item?key=APIKEY&market_hash_name=AK-47%20%7C%20Redline%20(Field-Tested)");
+            WebResponse response = request.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+            string responseText = reader.ReadToEnd();
+            item_info item = JsonConvert.DeserializeObject<item_info>(responseText);
             Console.ReadLine();
-
-
+            
         }
     }
 }
