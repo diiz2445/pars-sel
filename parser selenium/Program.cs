@@ -11,7 +11,7 @@ namespace parser_selenium
 {
     internal class Program
     {
-        private static async void Main(string[] args)
+        static async Task Main(string[] args)
         {
 
             //Class_for_parse_names parse_names = new Class_for_parse_names();
@@ -24,9 +24,9 @@ namespace parser_selenium
             //ParseCsMoney parseCsMoney = new ParseCsMoney();
             //parseCsMoney.GetNames();
             //DB dB = new DB();
-            string json = System.IO.File.ReadAllText("cs2_marketplaceids.json");
+            //string json = System.IO.File.ReadAllText("cs2_marketplaceids.json");
             Console.WriteLine("readed");
-            ItemCollection itemCollection = JsonConvert.DeserializeObject<ItemCollection>(json);
+            //ItemCollection itemCollection = JsonConvert.DeserializeObject<ItemCollection>(json);
             //itemCollection.print();
             
             HttpClient httpClient = new HttpClient();
@@ -34,7 +34,7 @@ namespace parser_selenium
             httpClient.BaseAddress = result;
 
 
-            HttpResponseMessage response = await httpClient.GetAsync("https://www.steamwebapi.com/steam/api/item?key=&market_hash_name=AK-47%20%7C%20Redline%20(Field-Tested)");
+            HttpResponseMessage response = await httpClient.GetAsync("https://www.steamwebapi.com/steam/api/item?key=OTWUI9X5EHED2V39&market_hash_name=AK-47%20%7C%20Redline%20(Field-Tested)");
             string msg = await response.Content.ReadAsStringAsync();
             Console.WriteLine($"{msg}");
 
