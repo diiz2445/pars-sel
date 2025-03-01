@@ -11,7 +11,7 @@ namespace parser_selenium
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        private static async void Main(string[] args)
         {
 
             //Class_for_parse_names parse_names = new Class_for_parse_names();
@@ -29,12 +29,20 @@ namespace parser_selenium
             ItemCollection itemCollection = JsonConvert.DeserializeObject<ItemCollection>(json);
             //itemCollection.print();
             
+            HttpClient httpClient = new HttpClient();
+            Uri.TryCreate("https://www.steamwebapi.com/steam/api/item?key=OTWUI9X5EHED2V39&market_hash_name=AK-47%20%7C%20Redline%20(Field-Tested)",0,out Uri result);
+            httpClient.BaseAddress = result;
 
-            WebRequest request = WebRequest.Create("https://www.steamwebapi.com/steam/api/item?key=APIKEY&market_hash_name=AK-47%20%7C%20Redline%20(Field-Tested)");
-            WebResponse response = request.GetResponse();
-            StreamReader reader = new StreamReader(response.GetResponseStream());
-            string responseText = reader.ReadToEnd();
-            item_info item = JsonConvert.DeserializeObject<item_info>(responseText);
+
+            HttpResponseMessage response = await httpClient.GetAsync("https://www.steamwebapi.com/steam/api/item?key=&market_hash_name=AK-47%20%7C%20Redline%20(Field-Tested)");
+            string msg = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"{msg}");
+
+            //WebRequest request = WebRequest.Create("https://www.steamwebapi.com/steam/api/item?key=OTWUI9X5EHED2V39&market_hash_name=AK-47%20%7C%20Redline%20(Field-Tested)");
+            //WebResponse response = request.GetResponse();
+            //StreamReader reader = new StreamReader(response.GetResponseStream());
+            //string responseText = reader.ReadToEnd();
+            //item_info item = JsonConvert.DeserializeObject<item_info>(responseText);
             Console.ReadLine();
             
         }

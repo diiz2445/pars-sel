@@ -29,8 +29,8 @@ namespace parser_selenium
             driver.Manage().Window.Minimize();
             driver.Url = "https://buff.163.com/market/csgo";
             List<IWebElement> elements = driver.FindElements(By.XPath("//*[@id=\"j_list_card\"]/ul/li/h3/a")).ToList();
-            try { names = deserialize(); Console.WriteLine("начальная сер пройдено"); }
-            catch { }
+            //try { names = deserialize(); Console.WriteLine("начальная сер пройдено"); }
+            //catch { }
             while (true)
             {
                 foreach (IWebElement element in elements)
@@ -67,25 +67,25 @@ namespace parser_selenium
         }
         public void serialize()
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            using (FileStream fs = new FileStream("codes.txt", FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fs, names);
+            //BinaryFormatter formatter = new BinaryFormatter();
+            //using (FileStream fs = new FileStream("codes.txt", FileMode.OpenOrCreate))
+            //{
+            //    formatter.Serialize(fs, names);
 
-                Console.WriteLine("Объект сериализован");
-            }
+            //    Console.WriteLine("Объект сериализован");
+            //}
         }
-        public static Dictionary<string,int> deserialize()
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-            using (FileStream fs = new FileStream("codes.txt", FileMode.Open))
-            {
-                Dictionary<string, int> newNames = (Dictionary<string, int>)formatter.Deserialize(fs);
+        //public static Dictionary<string,int> deserialize()
+        //{
+        //    BinaryFormatter formatter = new BinaryFormatter();
+        //    using (FileStream fs = new FileStream("codes.txt", FileMode.Open))
+        //    {
+        //        Dictionary<string, int> newNames = (Dictionary<string, int>)formatter.Deserialize(fs);
 
-                Console.WriteLine("Объект десериализован");
-                Console.WriteLine($"Info: {newNames}");
-                return newNames;
-            }
-        }
+        //        Console.WriteLine("Объект десериализован");
+        //        Console.WriteLine($"Info: {newNames}");
+        //        return newNames;
+        //    }
+        //}
     }
 }
