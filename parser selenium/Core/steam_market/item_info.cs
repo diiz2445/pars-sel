@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace parser_selenium.Core.steam_market
 {
-    internal class item_info
+    internal class item_info_CS
     {
         public string id;
         public string markethashname;

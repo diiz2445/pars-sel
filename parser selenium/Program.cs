@@ -6,7 +6,7 @@ using System.Text.Json.Nodes;
 using parser_selenium.Core.steam_market;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-
+using parser_selenium.Tests;
 
 namespace parser_selenium
 {
@@ -14,8 +14,8 @@ namespace parser_selenium
     {
         static async Task Main(string[] args)
         {
-            
 
+            Test.TestBuff();
 
             HttpClient httpClient = new HttpClient();
             Uri.TryCreate("https://www.steamwebapi.com/steam/api/item?key=OTWUI9X5EHED2V39&market_hash_name=AK-47%20%7C%20Redline%20(Field-Tested)",0,out Uri result);
@@ -25,7 +25,7 @@ namespace parser_selenium
             HttpResponseMessage response = await httpClient.GetAsync("https://www.steamwebapi.com/steam/api/item?key=OTWUI9X5EHED2V39&market_hash_name=AK-47%20%7C%20Redline%20(Field-Tested)");
             string msg = await response.Content.ReadAsStringAsync();
             Console.WriteLine($"{msg}");
-            item_info info= JsonConvert.DeserializeObject<item_info>(msg);
+            item_info_CS info= JsonConvert.DeserializeObject<item_info_CS>(msg);
             Console.WriteLine(info);
             
 
