@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Text.Json;
+
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using Newtonsoft.Json;
+
 
 namespace parser_selenium
 {
@@ -67,24 +69,24 @@ namespace parser_selenium
         }
         public void serialize()
         {
-            //BinaryFormatter formatter = new BinaryFormatter();
-            //using (FileStream fs = new FileStream("codes.txt", FileMode.OpenOrCreate))
-            //{
-            //    formatter.Serialize(fs, names);
+            string JsonNames = JsonConvert.SerializeObject(names,Formatting.Indented);
 
-            //    Console.WriteLine("Объект сериализован");
-            //}
+            using (StreamWriter fs = File.CreateText("codes.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(fs, JsonNames);
+
+                Console.WriteLine("Объект сериализован");
+            }
         }
         public static Dictionary<string, int> deserialize()
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            using (FileStream fs = new FileStream("codes.txt", FileMode.Open))
+            JsonConvert.DeserializeObject<Dictionary<string,string>>(File.ReadAllText("codes.json"));
+            
+            using (StreamReader file = File.OpenText("codes.json"))
             {
-                Dictionary<string, int> newNames = (Dictionary<string, int>)formatter.Deserialize(fs);
-
-                Console.WriteLine("Объект десериализован");
-                Console.WriteLine($"Info: {newNames}");
-                return newNames;
+                JsonSerializer jsonSerializer = new JsonSerializer();
+                return (Dictionary<string, int>)jsonSerializer.Deserialize(file,typeof(Dictionary<string,int>));
             }
         }
     }
