@@ -75,17 +75,17 @@ namespace parser_selenium
             //    Console.WriteLine("Объект сериализован");
             //}
         }
-        //public static Dictionary<string,int> deserialize()
-        //{
-        //    BinaryFormatter formatter = new BinaryFormatter();
-        //    using (FileStream fs = new FileStream("codes.txt", FileMode.Open))
-        //    {
-        //        Dictionary<string, int> newNames = (Dictionary<string, int>)formatter.Deserialize(fs);
+        public static Dictionary<string, int> deserialize()
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream fs = new FileStream("codes.txt", FileMode.Open))
+            {
+                Dictionary<string, int> newNames = (Dictionary<string, int>)formatter.Deserialize(fs);
 
-        //        Console.WriteLine("Объект десериализован");
-        //        Console.WriteLine($"Info: {newNames}");
-        //        return newNames;
-        //    }
-        //}
+                Console.WriteLine("Объект десериализован");
+                Console.WriteLine($"Info: {newNames}");
+                return newNames;
+            }
+        }
     }
 }
