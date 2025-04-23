@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using parser_selenium.Imports;
 
 
 namespace parser_selenium
@@ -22,18 +23,19 @@ namespace parser_selenium
             names = new Dictionary<string, int>();
         }
 
-        public void Parse()
+        public async Task Parse()
         {
-            IWebDriver driver = new EdgeDriver();
-            
-            driver.Url = "https://buff.163.com/market/csgo";
-            List<IWebElement> elements = driver.FindElements(By.XPath("//*[@id=\"j_list_card\"]/ul/li/h3/a")).ToList();
-            
-            try {deserialize(); Console.WriteLine("начальная сер пройдено"); }
-            catch(Exception e) { Console.WriteLine($"Exception: {e.Message}"); }
-            
-            //while (true)
+            while (true)
             {
+                
+                IWebDriver driver = new EdgeDriver();
+
+                driver.Url = "https://buff.163.com/market/csgo";
+                List<IWebElement> elements = driver.FindElements(By.XPath("//*[@id=\"j_list_card\"]/ul/li/h3/a")).ToList();
+                string PathFile = "codes.json";
+                try { names = await importData.DeserializeDictAsync(PathFile); Console.WriteLine("начальная сер пройдено"); }
+                catch (Exception e) { Console.WriteLine($"Exception: {e.Message}"); }
+
                 foreach (IWebElement element in elements)
                 {
                     //try
@@ -63,24 +65,17 @@ namespace parser_selenium
                     }
                     //catch { }
                 }
-                serialize();
-                Thread.Sleep(1000);
+                importData.SerializeAsync(PathFile, names);
+                driver.Close();
+                Console.WriteLine($"Count names: {names.Count}");
+
+                Thread.Sleep(50000);
+
+
                 
-                
-               
             }
-            driver.Close();
-        }
-        public void serialize()
-        {
-            File.WriteAllText("codes.json", JsonConvert.SerializeObject(names));
-            Console.WriteLine("Ser done");
-        }
-        public void deserialize()
-        {
-            string st = File.ReadAllText("codes.json");
-            names = JsonConvert.DeserializeObject<Dictionary<string, int>>(st);
             
         }
+        
     }
 }

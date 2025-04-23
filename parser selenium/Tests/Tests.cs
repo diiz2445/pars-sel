@@ -7,6 +7,8 @@ using parser_selenium.Tests;
 using System.Text.Json;
 using Newtonsoft.Json;
 using System.IO;
+using parser_selenium.TG_BOT;
+using parser_selenium.Imports;
 
 namespace parser_selenium.Tests
 {
@@ -24,12 +26,19 @@ namespace parser_selenium.Tests
             ItemCollection itemCollection = JsonConvert.DeserializeObject<ItemCollection>(json);
             itemCollection.print();
         }
-        public static void TestBuff() 
+        public static async Task TestBuff() 
         {
+            string path = "codes.json";
             Class_for_parse_names parse_Names = new Class_for_parse_names();
-            parse_Names.deserialize();
+            Dictionary<string,int> data = await importData.DeserializeDictAsync(path);
             parse_Names.Parse();
+            Console.WriteLine($"Count = {parse_Names.names.Count()}");
 
+        }
+        public static async Task TestBot()
+        {
+            Bot bot = new Bot();
+            await Bot.Run();
         }
 
     }
