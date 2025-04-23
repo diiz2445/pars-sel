@@ -25,8 +25,6 @@ namespace parser_selenium
 
         public async Task Parse()
         {
-
-            int k = 0;
             while (true)
             {
                 
@@ -67,28 +65,17 @@ namespace parser_selenium
                     }
                     //catch { }
                 }
-                await importData.SerializeAsync(PathFile, names);
+                importData.SerializeAsync(PathFile, names);
                 driver.Close();
-                Thread.Sleep(20000);
+                Console.WriteLine($"Count names: {names.Count}");
+
+                Thread.Sleep(50000);
 
 
-               
-                k++;
-                if(k==15)
-                    Console.ReadLine();
+                
             }
             
         }
-        public void serialize()
-        {
-            File.WriteAllText("codes.json", JsonConvert.SerializeObject(names));
-            Console.WriteLine("Ser done");
-        }
-        public void deserialize(string path)
-        {
-            string st = File.ReadAllText("codes.json");
-            names = JsonConvert.DeserializeObject<Dictionary<string, int>>(st);
-            
-        }
+        
     }
 }
