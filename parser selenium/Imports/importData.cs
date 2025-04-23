@@ -24,5 +24,9 @@ namespace parser_selenium.Imports
             Console.WriteLine("Deser done");
             return names;
         }
+        public static string importToken()
+        {
+            return File.ReadAllText("token.txt");
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Telegram.Bot;
+﻿using parser_selenium.Imports;
+using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
@@ -20,7 +21,7 @@ namespace parser_selenium.TG_BOT
         public static async Task Run()
         {
 
-            _botClient = new TelegramBotClient(""); // Присваиваем нашей переменной значение, в параметре передаем Token, полученный от BotFather
+            _botClient = new TelegramBotClient(importData.importToken()); // Присваиваем нашей переменной значение, в параметре передаем Token, полученный от BotFather
             _receiverOptions = new ReceiverOptions // Также присваем значение настройкам бота
             {
                 AllowedUpdates = new[] // Тут указываем типы получаемых Update`ов, о них подробнее расказано тут https://core.telegram.org/bots/api#update
