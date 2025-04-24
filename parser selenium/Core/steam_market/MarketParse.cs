@@ -25,15 +25,19 @@ namespace parser_selenium.Core.steam_market
                 items.Add(url.Key,ParsePage(url.Value));
                 Thread.Sleep(10 * 1000);
             }
-            
+            driver.Quit();
         }
         public string[,] ParsePage(string url) 
         {
            
             driver.Url = url;
-            List<IWebElement> elements = driver.FindElements(By.XPath("//*[@id=\"market_commodity_forsale_table\"]/table/tbody/tr")).ToList();
+            Thread.Sleep(100);
+
+            List<IWebElement> elements = new List<IWebElement>();
+            while(elements.Count==0)
+                elements = driver.FindElements(By.XPath("//*[@id=\"market_commodity_forsale_table\"]/table/tbody/tr")).ToList();
             string[,] items = new string[5,2];//[Count Elements,0 - Price|1 - Count]
-            int IndexURL = 0;
+            
             //foreach(IWebElement element in elements)
             for(int i=1;i<elements.Count-1;i++)
             {
@@ -48,21 +52,24 @@ namespace parser_selenium.Core.steam_market
         }
         public async Task<string> GetNotifyAllItemsString()
         {
+            Console.WriteLine("Start GetNotify");
             StringBuilder sb = new StringBuilder() ;
             ParseETS();
-
+            Console.WriteLine("EndParse");
             foreach (var item in items)
             {
-                sb.Append($"*Item:* {item.Key.ToString()}\n*Prices:*");
+                Console.WriteLine("AppndItem");
+                sb.Append($"**Item:** {item.Key.ToString()}\n*Prices:*\n");
                 
                     for(int i = 0; i < item.Value.GetLength(0);i++)
                     {
                         sb.AppendLine($"{i+1}. {item.Value[i,0]} | {item.Value[i,1]}");
                     }
-                
+                sb.AppendLine();
             }
+            Console.WriteLine("End Getnotify");
+            Console.WriteLine(sb.ToString());
 
-            Console.WriteLine(sb);
             return sb.ToString();
         }
 

@@ -1,4 +1,5 @@
-﻿using parser_selenium.Imports;
+﻿using parser_selenium.Core.steam_market;
+using parser_selenium.Imports;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
@@ -27,7 +28,7 @@ namespace parser_selenium.TG_BOT
                 AllowedUpdates = new[] // Тут указываем типы получаемых Update`ов, о них подробнее расказано тут https://core.telegram.org/bots/api#update
                 {
                 UpdateType.Message, // Сообщения (текст, фото/видео, голосовые/видео сообщения и т.д.)
-            }
+                }
                 // Параметр, отвечающий за обработку сообщений, пришедших за то время, когда ваш бот был оффлайн
                 // True - не обрабатывать, False (стоит по умолчанию) - обрабаывать
                 
@@ -97,6 +98,14 @@ namespace parser_selenium.TG_BOT
 
                                         return;
                                     }
+                                case "updateets":
+                                    {
+                                        MarketParse parse = new MarketParse();
+                                        botClient.SendMessage(chat.Id, await parse.GetNotifyAllItemsString(),ParseMode.Markdown);
+                                        Console.WriteLine("SendMessage done");
+                                        return;
+                                    }
+                                  
                                 default:
                                     return;
 

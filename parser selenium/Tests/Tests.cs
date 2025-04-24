@@ -10,6 +10,7 @@ using System.IO;
 using parser_selenium.TG_BOT;
 using parser_selenium.Imports;
 using parser_selenium.Core.steam_market;
+using parser_selenium.Core.Buff;
 
 
 namespace parser_selenium.Tests
@@ -28,7 +29,7 @@ namespace parser_selenium.Tests
         public static async Task TestBuff() 
         {
             string path = "codes.json";
-            Class_for_parse_names parse_Names = new Class_for_parse_names();
+            BuffParse parse_Names = new BuffParse();
             Dictionary<string,int> data = await importData.DeserializeDictAsync(path);
             await parse_Names.Parse();
             Console.WriteLine($"Count = {parse_Names.names.Count()}");

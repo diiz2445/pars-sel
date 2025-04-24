@@ -10,15 +10,15 @@ using Newtonsoft.Json;
 using parser_selenium.Imports;
 
 
-namespace parser_selenium
+namespace parser_selenium.Core.Buff
 {
     [Serializable]
-    internal class Class_for_parse_names
+    internal class BuffParse
     {
 
         public Dictionary<string, int> names;
 
-        public Class_for_parse_names()
+        public BuffParse()
         {
             names = new Dictionary<string, int>();
         }
@@ -27,7 +27,7 @@ namespace parser_selenium
         {
             while (true)
             {
-                
+
                 IWebDriver driver = new EdgeDriver();
 
                 driver.Url = "https://buff.163.com/market/csgo";
@@ -47,7 +47,7 @@ namespace parser_selenium
 
                         for (int i = 0; i < nameA.Length; i++)
                         {
-                            if (nameA[i] != "|" && (!nameA[i].Contains('(')) && nameA[i] != "|" && (!nameA[i].Contains(')')))
+                            if (nameA[i] != "|" && !nameA[i].Contains('(') && nameA[i] != "|" && !nameA[i].Contains(')'))
                                 name += nameA[i] + " ";
                         }
                         name = name.TrimEnd();
@@ -72,10 +72,10 @@ namespace parser_selenium
                 Thread.Sleep(50000);
 
 
-                
+
             }
-            
+
         }
-        
+
     }
 }
