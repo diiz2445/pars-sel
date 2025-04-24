@@ -15,7 +15,7 @@ namespace parser_selenium
     [Serializable]
     internal class Class_for_parse_names
     {
-        
+
         public Dictionary<string, int> names;
 
         public Class_for_parse_names()

@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using System.IO;
 using parser_selenium.TG_BOT;
 using parser_selenium.Imports;
+using parser_selenium.Core.steam_market;
+
 
 namespace parser_selenium.Tests
 {
@@ -16,9 +18,6 @@ namespace parser_selenium.Tests
     {
         public static void TestCSM()
         {
-            
-            
-
             ParseCsMoney parseCsMoney = new ParseCsMoney();
             parseCsMoney.GetNames();
             string json = File.ReadAllText("cs2_marketplaceidds.json");
@@ -31,7 +30,7 @@ namespace parser_selenium.Tests
             string path = "codes.json";
             Class_for_parse_names parse_Names = new Class_for_parse_names();
             Dictionary<string,int> data = await importData.DeserializeDictAsync(path);
-            parse_Names.Parse();
+            await parse_Names.Parse();
             Console.WriteLine($"Count = {parse_Names.names.Count()}");
 
         }
@@ -39,6 +38,19 @@ namespace parser_selenium.Tests
         {
             Bot bot = new Bot();
             await Bot.Run();
+        }
+        public static async Task TestSerialize()
+        {
+            string path = "urls.json";
+            var obj = new Urls();
+            await importData.SerializeAsync(path,obj);
+
+            Urls obj2 = await importData.DeserializeUrlsAsync(path);
+        }
+        public static async Task TestMarket()
+        {
+            MarketParse marketParse = new MarketParse();
+            marketParse.GetNotifyAllItemsString();
         }
 
     }

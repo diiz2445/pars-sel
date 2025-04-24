@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using parser_selenium.Core.steam_market;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,14 @@ namespace parser_selenium.Imports
             Console.WriteLine("Deser done");
             return names;
         }
+        public static async Task<Urls> DeserializeUrlsAsync(string path)
+        {
+            string st = File.ReadAllText(path);
+            Urls obj = JsonConvert.DeserializeObject<Urls>(st);
+            
+            return obj;
+        }
+
         public static string importToken()
         {
             return File.ReadAllText("token.txt");
