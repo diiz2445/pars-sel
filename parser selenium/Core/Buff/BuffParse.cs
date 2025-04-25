@@ -38,6 +38,7 @@ namespace parser_selenium.Core.Buff
 
                 foreach (IWebElement element in elements)
                 {
+                        
                     //try
                     {
                         Console.WriteLine(element.Text);
