@@ -17,7 +17,7 @@ namespace parser_selenium.Tests
 {
     internal class Test
     {
-        public static void TestCSM()
+        public static async Task TestCSM()
         {
             ParseCsMoney parseCsMoney = new ParseCsMoney();
             parseCsMoney.GetNames();
@@ -51,7 +51,7 @@ namespace parser_selenium.Tests
         public static async Task TestMarket()
         {
             MarketParse marketParse = new MarketParse();
-            marketParse.GetNotifyAllItemsString();
+            await marketParse.GetNotifyAllItemsString();
         }
 
     }

@@ -51,12 +51,15 @@ namespace parser_selenium.Core.steam_market
                 IWebElement elementForSale = elementsForSale[i];
                 IWebElement elementForBuy = elementsForBuy[i];
                 
+                //sell
                 items[0][i-1,0] = elementForSale.Text.Split(' ')[0].Remove(0,1);//price without '$'
                 items[0][i-1,1] = elementForSale.Text.Split(' ')[1];//Count of items with current price
 
-                items[1][i - 1, 0] = elementForSale.Text.Split(' ')[0].Remove(0, 1);//price without '$'
-                items[1][i - 1, 1] = elementForSale.Text.Split(' ')[1];//Count of items with current price
-                Console.WriteLine(elementForSale.Text);
+                //Buy
+                items[1][i - 1, 0] = elementForBuy.Text.Split(' ')[0].Remove(0, 1);//price without '$'
+                items[1][i - 1, 1] = elementForBuy.Text.Split(' ')[1];//Count of items with current price
+                //Console.WriteLine("Sell:\n"+elementForSale.Text+"\n");
+                //Console.WriteLine("Buy:\n"+elementForBuy.Text+"\n");
                 
 
             }
@@ -67,17 +70,23 @@ namespace parser_selenium.Core.steam_market
         {
             Console.WriteLine("Start GetNotify");
             StringBuilder sb = new StringBuilder() ;
-            ParseETS();
+            await ParseETS();
             Console.WriteLine("EndParse");
             foreach (var item in items)
             {
-                Console.WriteLine("AppndItem");
-                sb.Append($"**Item:** {item.Key.ToString()}\n*Prices:*\n");
+                Console.WriteLine("AppndItemSell");
+                sb.Append($"*Item:* {item.Key.ToString()}\n*sell:*\n");
                 
-                    for(int i = 0; i < item.Value.GetLength(0);i++)
-                    {
-                        sb.AppendLine($"{i+1}. {item.Value[0][i,0]} | {item.Value[0][i,1]}");
-                    }
+                for(int i = 0; i < item.Value[0].GetLength(0);i++)
+                {
+                    sb.AppendLine($"{i+1}. {item.Value[0][i,0]} | {item.Value[0][i,1]}");
+                }
+                sb.AppendLine($"\n*buy:*");
+
+                for (int i = 0; i < item.Value[0].GetLength(0); i++)
+                {
+                    sb.AppendLine($"{i + 1}. {item.Value[1][i, 0]} | {item.Value[1][i, 1]}");
+                }
                 sb.AppendLine();
             }
             Console.WriteLine("End Getnotify");

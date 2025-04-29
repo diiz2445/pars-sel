@@ -15,10 +15,12 @@ namespace parser_selenium
     {
         static async Task Main(string[] args)
         {
-            
+
 
             //Test.TestSerialize();
-            //await Test.TestBot();
+            await Test.TestBot();
+            await Test.TestMarket();
+            await Test.TestCSM();
             await Test.TestBuff();
             HttpClient httpClient = new HttpClient();
             Uri.TryCreate("https://www.steamwebapi.com/steam/api/item?key=OTWUI9X5EHED2V39&market_hash_name=AK-47%20%7C%20Redline%20(Field-Tested)",0,out Uri result);
