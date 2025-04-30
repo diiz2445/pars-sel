@@ -18,7 +18,7 @@ namespace parser_selenium
 
 
             //Test.TestSerialize();
-            await Test.TestBot();
+            //await Test.TestBot();
             await Test.TestMarket();
             await Test.TestCSM();
             await Test.TestBuff();

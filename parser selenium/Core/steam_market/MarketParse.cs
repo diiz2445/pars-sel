@@ -13,7 +13,7 @@ namespace parser_selenium.Core.steam_market
     {
         IWebDriver driver = new EdgeDriver();
         Dictionary<string, string[][,]> items;
-
+        double[] margins;
         public MarketParse() { }
         public async Task ParseETS()//парсинг страниц ETS2
         {
@@ -26,6 +26,7 @@ namespace parser_selenium.Core.steam_market
                 Thread.Sleep(10 * 1000);
             }
             driver.Quit();
+            margins = CalculateMargin();
         }
         public string[][,] ParsePage(string url)//Парсинг одной страницы на маркете 
         {
@@ -72,6 +73,7 @@ namespace parser_selenium.Core.steam_market
             StringBuilder sb = new StringBuilder() ;
             await ParseETS();
             Console.WriteLine("EndParse");
+            int k = 0;
             foreach (var item in items)
             {
                 Console.WriteLine("AppndItemSell");
@@ -87,14 +89,29 @@ namespace parser_selenium.Core.steam_market
                 {
                     sb.AppendLine($"{i + 1}. {item.Value[1][i, 0]} | {item.Value[1][i, 1]}");
                 }
+                sb.AppendLine($"*Margin:*\n{margins[k]:f2}");
+                k++;
                 sb.AppendLine();
             }
+            
             Console.WriteLine("End Getnotify");
             Console.WriteLine(sb.ToString());
 
             return sb.ToString();
         }
-
+        private double[] CalculateMargin()
+        {
+            double[] margin = new double[items.Count];
+            int i = 0;
+            foreach (var item in items)
+            {
+                double sell = Convert.ToDouble((item.Value[0][0,0]).Replace('.',','))*0.87;
+                double buy = Convert.ToDouble((item.Value[1][0, 0]).Replace('.', ','));
+                margin[i] = (sell/buy)-1;
+                i++;
+            }
+            return margin;
+        }
 
     }
 }
