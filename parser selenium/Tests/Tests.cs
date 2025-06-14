@@ -11,6 +11,7 @@ using parser_selenium.TG_BOT;
 using parser_selenium.Imports;
 using parser_selenium.Core.steam_market;
 using parser_selenium.Core.Buff;
+using parser_selenium.Core.CSDB;
 
 
 namespace parser_selenium.Tests
@@ -52,6 +53,11 @@ namespace parser_selenium.Tests
         {
             MarketParse marketParse = new MarketParse();
             await marketParse.GetNotifyAllItemsString();
+        }
+        public static async Task TestCSGODB()
+        {
+            CSGODB_Parse cSGODB_Parse = new CSGODB_Parse();
+            await cSGODB_Parse.Parse();
         }
 
     }

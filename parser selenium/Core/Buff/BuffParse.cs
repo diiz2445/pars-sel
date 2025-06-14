@@ -66,7 +66,7 @@ namespace parser_selenium.Core.Buff
                     }
                     //catch { }
                 }
-                importData.SerializeAsync(PathFile, names);
+                await importData.SerializeAsync(PathFile, names);
                 driver.Close();
                 Console.WriteLine($"Count names: {names.Count}");
 

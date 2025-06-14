@@ -19,7 +19,8 @@ namespace parser_selenium
 
             //Test.TestSerialize();
             //await Test.TestBot();
-            await Test.TestMarket();
+            //await Test.TestMarket();
+            await Test.TestCSGODB();
             await Test.TestCSM();
             await Test.TestBuff();
             HttpClient httpClient = new HttpClient();
