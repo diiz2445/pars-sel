@@ -21,7 +21,7 @@ namespace parser_selenium.Core.CSDB
         }
 
         /// <summary>
-        /// Base func https://www.csgodatabase.com/skins/
+        /// Base func for https://www.csgodatabase.com/skins/
         /// </summary>
         public async Task Parse()
         {
@@ -31,14 +31,13 @@ namespace parser_selenium.Core.CSDB
             foreach (IWebElement element in elements)
             {
                 Item item = new Item();
-                //IWebElement Name = element.FindElement(By.ClassName("a"));
                 IWebElement[] tmp = element.FindElements(By.TagName("td")).ToArray();
                 
                 item.Name = tmp[0].Text;
                 item.Rarity = tmp[1].Text;
                 item.Collection = tmp[2].Text;
                 item.Introduced = tmp[3].Text;
-                    //*[@id="post-23"]/section/table[3]/tbody/tr[1]/td[1]/a
+               
                 items.Add(item);
             }
             importData.SerializeAsync("CSGODB.json", items);
