@@ -12,6 +12,7 @@ using parser_selenium.Imports;
 using parser_selenium.Core.steam_market;
 using parser_selenium.Core.Buff;
 using parser_selenium.Core.CSDB;
+using parser_selenium.Core;
 
 
 namespace parser_selenium.Tests
@@ -58,6 +59,11 @@ namespace parser_selenium.Tests
         {
             CSGODB_Parse cSGODB_Parse = new CSGODB_Parse();
             await cSGODB_Parse.Parse();
+        }
+        public static async Task TestGetURL()
+        {
+            Data data = new Data();
+            Console.WriteLine(MarketParse.GetURL("CS", data.items[0], data.quality[0]));
         }
 
     }

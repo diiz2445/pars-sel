@@ -112,9 +112,17 @@ namespace parser_selenium.Core.steam_market
             }
             return margin;
         }
-        //private string GetURL()
-        //{
+        public static string GetURL(string game,Item item, string quality)
+        {
+            Data data = new Data();
+            string name = $"{item.Name} ({quality})";
+            foreach(var currentReplace in data.URL_Replaces)
+            {
+                name = name.Replace(currentReplace.Key, currentReplace.Value);
+            }
 
-        //}
+            string URL = new string($"https://steamcommunity.com/market/listings/{Urls.GameID["CS"].ToString()}/{name}");
+            return URL;
+        }
     }
 }

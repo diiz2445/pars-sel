@@ -33,7 +33,7 @@ namespace parser_selenium.Imports
             
             return obj;
         }
-        public static async Task<List<Item>> GetItemsAsync(string path)
+        public static List<Item> GetItems(string path)
         {
             string st = File.ReadAllText(path);
             List<Item> obj = JsonConvert.DeserializeObject<List<Item>>(st);

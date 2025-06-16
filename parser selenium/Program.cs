@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using parser_selenium.Tests;
 using parser_selenium.Core;
 using parser_selenium.TG_BOT;
+using System.Security.Cryptography.X509Certificates;
+using parser_selenium.Core.CSDB;
 
 namespace parser_selenium
 {
@@ -18,10 +20,13 @@ namespace parser_selenium
         {
 
             Data data = new Data();
-            data.init();
+
             //Test.TestSerialize();
             //await Test.TestBot();
             //await Test.TestMarket();
+            CSGODB_Parse cSGODB_Parse = new CSGODB_Parse();
+            cSGODB_Parse.ParseWeapon();
+            Test.TestGetURL();
             await Test.TestCSGODB();
             await Test.TestCSM();
             await Test.TestBuff();

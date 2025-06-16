@@ -13,6 +13,7 @@ namespace parser_selenium.Core.CSDB
     internal class CSGODB_Parse
     {
         string URL_skins = "https://www.csgodatabase.com/skins/";
+        string URL_weapon = "https://www.csgodatabase.com/weapons/";
         IWebDriver driver = new ChromeDriver();
         List<Item> items = new List<Item>();
         public async Task Parse(string url)
@@ -41,6 +42,20 @@ namespace parser_selenium.Core.CSDB
                 items.Add(item);
             }
             importData.SerializeAsync("CSGODB.json", items);
+        }
+        public async Task ParseWeapon()
+        {
+            driver.Url = URL_weapon;
+            List<IWebElement> elements = driver.FindElements(By.ClassName("row")).ToList();
+            StringBuilder ctrlc = new StringBuilder( "{\n");
+            foreach (IWebElement element in elements)
+            {
+
+                ctrlc.Append($"{element.Text},\n");
+            }
+
+            Console.WriteLine(ctrlc.ToString());
+            
         }
     }
     
