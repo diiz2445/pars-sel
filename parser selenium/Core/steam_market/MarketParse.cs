@@ -112,6 +112,9 @@ namespace parser_selenium.Core.steam_market
             }
             return margin;
         }
+        //private string GetURL()
+        //{
 
+        //}
     }
 }

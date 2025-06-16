@@ -42,20 +42,7 @@ namespace parser_selenium.Core.CSDB
             }
             importData.SerializeAsync("CSGODB.json", items);
         }
-    } 
-    internal class Item
-    {
-        
-        string name;
-        public string Name {  get=>name; set { name = value; } }
-
-        string rarity;
-        public string Rarity {  get=>rarity; set { rarity = value; } }
-
-        string collection;
-        public string Collection { get=>collection; set { collection = value; } }
-
-        string introduced;
-        public string Introduced { get=>introduced; set { introduced = value; } }
     }
+    
+    
 }

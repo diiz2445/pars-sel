@@ -7,6 +7,7 @@ using parser_selenium.Core.steam_market;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using parser_selenium.Tests;
+using parser_selenium.Core;
 using parser_selenium.TG_BOT;
 
 namespace parser_selenium
@@ -16,7 +17,8 @@ namespace parser_selenium
         static async Task Main(string[] args)
         {
 
-
+            Data data = new Data();
+            data.init();
             //Test.TestSerialize();
             //await Test.TestBot();
             //await Test.TestMarket();

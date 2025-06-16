@@ -10,7 +10,7 @@ namespace parser_selenium
     public class ItemCollection
     {
         [JsonProperty("items")]
-        public Dictionary<string, Item> Items { get; set; }
+        public Dictionary<string, Item_Buff> Items { get; set; }
 
         public void print()
         {

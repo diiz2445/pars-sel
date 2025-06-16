@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace parser_selenium
 {
-    public class Item
+    public class Item_Buff
     {
         [JsonProperty("buff163_goods_id")]
         public int Buff163GoodsId { get; set; }

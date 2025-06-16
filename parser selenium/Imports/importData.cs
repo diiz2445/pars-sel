@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using parser_selenium.Core.steam_market;
+using parser_selenium.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,13 @@ namespace parser_selenium.Imports
             string st = File.ReadAllText(path);
             Urls obj = JsonConvert.DeserializeObject<Urls>(st);
             
+            return obj;
+        }
+        public static async Task<List<Item>> GetItemsAsync(string path)
+        {
+            string st = File.ReadAllText(path);
+            List<Item> obj = JsonConvert.DeserializeObject<List<Item>>(st);
+
             return obj;
         }
 
