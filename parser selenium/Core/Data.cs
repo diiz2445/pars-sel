@@ -24,10 +24,7 @@ namespace parser_selenium.Core
             "SMGs",
             "Heavy",
             "Knives",
-            "Other",
-            "",
-            "",
-
+            "Other"
         };
         public List<string> Weapons = new List<string>
         {
@@ -103,7 +100,7 @@ namespace parser_selenium.Core
             items = importData.GetItems("CSGODB.json");
         }
     }
-    internal struct Item
+    internal class Item
     {
 
         string name;
@@ -117,5 +114,13 @@ namespace parser_selenium.Core
 
         string introduced;
         public string Introduced { get => introduced; set { introduced = value; } }
+
+        Dictionary<string,string> steamURLs;
+        public Dictionary<string,string> SteamURLs { get => steamURLs; set { steamURLs = value; } }
+
+        public Item()
+        {
+            steamURLs = new Dictionary<string, string>();
+        }
     }
 }

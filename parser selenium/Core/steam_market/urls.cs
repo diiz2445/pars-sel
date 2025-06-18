@@ -21,9 +21,6 @@ namespace parser_selenium.Core.steam_market
                 {"Pit Stop","https://steamcommunity.com/market/listings/227300/Pit%20Stop" }
 
             };
-        public static Dictionary<string,string> GetETS2URLs()
-        {
-            return ETS2;
-        }
+        
     }
 }

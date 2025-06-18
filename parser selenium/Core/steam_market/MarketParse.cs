@@ -19,7 +19,7 @@ namespace parser_selenium.Core.steam_market
         {
 
             items = new Dictionary<string, string[][,]>();
-            Dictionary<string,string> urls = Urls.GetETS2URLs();
+            Dictionary<string,string> urls = Urls.ETS2;
             foreach (var url in urls)
             {
                 items.Add(url.Key,ParsePage(url.Value));
@@ -121,8 +121,7 @@ namespace parser_selenium.Core.steam_market
                 name = name.Replace(currentReplace.Key, currentReplace.Value);
             }
 
-            string URL = new string($"https://steamcommunity.com/market/listings/{Urls.GameID["CS"].ToString()}/{name}");
-            return URL;
+            return ($"https://steamcommunity.com/market/listings/{Urls.GameID[game].ToString()}/{name}");
         }
     }
 }

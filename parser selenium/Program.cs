@@ -11,6 +11,7 @@ using parser_selenium.Core;
 using parser_selenium.TG_BOT;
 using System.Security.Cryptography.X509Certificates;
 using parser_selenium.Core.CSDB;
+using parser_selenium.Imports;
 
 namespace parser_selenium
 {
@@ -21,12 +22,18 @@ namespace parser_selenium
 
             Data data = new Data();
 
-            //Test.TestSerialize();
-            //await Test.TestBot();
-            //await Test.TestMarket();
-            CSGODB_Parse cSGODB_Parse = new CSGODB_Parse();
-            cSGODB_Parse.ParseWeapon();
-            Test.TestGetURL();
+            List<Item> items = importData.GetItems("CSGODB.json");
+            foreach (Item item in items)
+            {
+                Dictionary<string,string> values = new Dictionary<string,string>();
+                foreach (string quality in data.quality)
+                {
+                    values.Add(quality, MarketParse.GetURL("CS", item, quality));
+                }
+                item.SteamURLs = values;
+                
+            }
+            importData.SerializeAsync("CSGODB.json", items);
             await Test.TestCSGODB();
             await Test.TestCSM();
             await Test.TestBuff();

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium.Chrome;
 using parser_selenium.Imports;
+using parser_selenium.Core.steam_market;
 
 namespace parser_selenium.Core.CSDB
 {
@@ -26,6 +27,7 @@ namespace parser_selenium.Core.CSDB
         /// </summary>
         public async Task Parse()
         {
+            Data data = new Data();
             driver.Url = URL_skins;
             List<IWebElement> elements = driver.FindElements(By.XPath("//*[@id=\"post-23\"]/section/table[3]/tbody/tr")).ToList();
             
@@ -38,7 +40,11 @@ namespace parser_selenium.Core.CSDB
                 item.Rarity = tmp[1].Text;
                 item.Collection = tmp[2].Text;
                 item.Introduced = tmp[3].Text;
-               
+                foreach(string quality in data.quality)
+                {
+                    item.SteamURLs.Add(quality,MarketParse.GetURL("CS", item, quality));
+                }
+                
                 items.Add(item);
             }
             importData.SerializeAsync("CSGODB.json", items);
@@ -56,6 +62,22 @@ namespace parser_selenium.Core.CSDB
 
             Console.WriteLine(ctrlc.ToString());
             
+        }
+        public async Task AddSteamURL()
+        {
+            Data data = new Data();
+            List<Item> items = importData.GetItems("CSGODB.json");
+            foreach (Item item in items)
+            {
+                Dictionary<string, string> values = new Dictionary<string, string>();
+                foreach (string quality in data.quality)
+                {
+                    values.Add(quality, MarketParse.GetURL("CS", item, quality));
+                }
+                item.SteamURLs = values;
+
+            }
+            await importData.SerializeAsync("CSGODB.json", items);
         }
     }
     
