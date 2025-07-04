@@ -63,7 +63,7 @@ namespace parser_selenium.Tests
         public static async Task TestGetURL()
         {
             Core.Data data = new Core.Data();
-            Console.WriteLine(MarketParse.GetURL("CS", data.items[0], data.quality[0]));
+            Console.WriteLine(MarketParse.GetURL("CS", data.items[0], data.Quality[0]));
         }
 
     }

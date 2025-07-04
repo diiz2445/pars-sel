@@ -17,6 +17,7 @@ namespace parser_selenium.Core
             { "|" , "%7C" },
             { "-" , "%20" }
         };
+        
         public List<string> Types = new List<string>
         {
             "Pistols",
@@ -85,7 +86,7 @@ namespace parser_selenium.Core
             "Zeus x27"
 
         };
-        public List<string> quality = new List<string>
+        public List<string> Quality = new List<string>
         {
             "Factory-New",
             "Minimal-Wear",
@@ -103,24 +104,30 @@ namespace parser_selenium.Core
     internal class Item
     {
 
-        string name;
+        string name;//название
         public string Name { get => name; set { name = value; } }
 
-        string rarity;
+        string rarity;//редкость
         public string Rarity { get => rarity; set { rarity = value; } }
 
-        string collection;
+        string collection;//коллекция
         public string Collection { get => collection; set { collection = value; } }
 
-        string introduced;
+        string introduced;//дата добавления
         public string Introduced { get => introduced; set { introduced = value; } }
 
-        Dictionary<string,string> steamURLs;
+        Dictionary<string,string> steamURLs;//словарь с ссылками, key - quality, value - URL 
         public Dictionary<string,string> SteamURLs { get => steamURLs; set { steamURLs = value; } }
+        
+        Dictionary<string, double> prices;//цены по качеству в момент парсинга  
+        public Dictionary<string, double> Prices { get => prices; set { prices = value; } }
+        Dictionary<string,uint> margin;
 
         public Item()
         {
             steamURLs = new Dictionary<string, string>();
+            Prices = new Dictionary<string, double>();
         }
+        
     }
 }

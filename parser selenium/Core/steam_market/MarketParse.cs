@@ -67,6 +67,24 @@ namespace parser_selenium.Core.steam_market
             
             return items;
         }
+        public static double ParseSellPrice(string url, IWebDriver driver)//Парсинг одной страницы на маркете 
+        {
+
+            driver.Url = url;
+            Thread.Sleep(500);
+            
+            string Price = "";
+            IWebElement elementForSell;
+            try { elementForSell = driver.FindElement(By.XPath("//*[@id=\"market_commodity_buyrequests\"]/span[2]")); Price = elementForSell.Text.Split(' ')[0].Remove(0, 1).Replace('.',',');}
+            catch 
+            {
+                try { elementForSell = driver.FindElement(By.XPath("//*[@id=\"market_commodity_forsale_table\"]/table/tbody/tr[1]")); Price = elementForSell.Text.Split(' ')[0].Remove(0, 1).Replace('.', ','); }
+                catch { Price = "-1"; }
+            }
+            
+            
+            return Convert.ToDouble(Price);
+        }
         public async Task<string> GetNotifyAllItemsString()
         {
             Console.WriteLine("Start GetNotify");
@@ -115,11 +133,12 @@ namespace parser_selenium.Core.steam_market
         public static string GetURL(string game,Item item, string quality)
         {
             Data data = new Data();
-            string name = $"{item.Name} ({quality})";
+            string name = $" ({quality})";
             foreach(var currentReplace in data.URL_Replaces)
             {
                 name = name.Replace(currentReplace.Key, currentReplace.Value);
             }
+            name = $"{item.Name}{name}";
 
             return ($"https://steamcommunity.com/market/listings/{Urls.GameID[game].ToString()}/{name}");
         }
