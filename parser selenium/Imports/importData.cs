@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace parser_selenium.Imports
 {
-    internal class importData
+    internal class Data
     {
         public static async Task SerializeAsync(string path, object obj)
         {
