@@ -1,4 +1,8 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.DevTools;
+using OpenQA.Selenium.DevTools.V138.Network;
+
 using OpenQA.Selenium.Edge;
 using System;
 using System.Collections.Generic;
@@ -75,6 +79,8 @@ namespace parser_selenium.Core.steam_market
             
             string Price = "";
             IWebElement elementForSell;
+            while (driver.FindElement(By.XPath("//*[@id=\"mainContents\"]/h2")) == null)
+                Thread.Sleep(40000);
             try { elementForSell = driver.FindElement(By.XPath("//*[@id=\"market_commodity_buyrequests\"]/span[2]")); Price = elementForSell.Text.Split(' ')[0].Remove(0, 1).Replace('.',',');}
             catch 
             {
@@ -141,6 +147,25 @@ namespace parser_selenium.Core.steam_market
             name = $"{item.Name}{name}";
 
             return ($"https://steamcommunity.com/market/listings/{Urls.GameID[game].ToString()}/{name}");
+        }
+        public static void ListenRequests(ref ChromeDriver driver)
+        {
+            // Получаем сессию DevTools
+            DevToolsSession devToolsSession = driver.GetDevToolsSession();
+
+            // Получаем объект Network из версии протокола
+            var network = devToolsSession.GetVersionSpecificDomains<OpenQA.Selenium.DevTools.V138.DevToolsSessionDomains>().Network;
+
+            // Включаем домен Network (активируем перехват сетевых запросов)
+            network.Enable(new EnableCommandSettings());
+
+            //Подписка на события реквестов
+            network.RequestWillBeSent += (sender, e) =>
+            {
+                Console.WriteLine("URL запроса: " + e.Request.Url);
+            };
+            driver.Navigate().Refresh();
+            while (driver.SessionId!=null) { }
         }
     }
 }

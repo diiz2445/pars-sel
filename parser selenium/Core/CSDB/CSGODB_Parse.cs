@@ -131,9 +131,9 @@ namespace parser_selenium.Core.CSDB
                     try
                     {
                         item.Prices.Add(quality, MarketParse.ParseSellPrice(item.SteamURLs[quality], driver));
-                        Console.WriteLine($"{item.Name}({quality}) = {item.Prices.ToString()}");
+                        Console.WriteLine($"{item.Name}({quality}) = {item.Prices[quality].ToString()}");
                     }
-                    catch { Console.WriteLine("already taken"); }
+                    catch(Exception e) { Console.WriteLine($"already taken or Ex: {e.Message}"); }
                     
                 }
                 await Imports.Data.SerializeAsync("CSGODB.json", items);
