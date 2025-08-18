@@ -32,7 +32,7 @@ namespace parser_selenium.Tests
         {
             string path = "codes.json";
             BuffParse parse_Names = new BuffParse();
-            Dictionary<string,int> data = await Imports.Data.DeserializeDictAsync(path);
+            Dictionary<string,int> data = await Imports.importData.DeserializeDictAsync(path);
             await parse_Names.Parse();
             Console.WriteLine($"Count = {parse_Names.names.Count()}");
 
@@ -46,9 +46,9 @@ namespace parser_selenium.Tests
         {
             string path = "urls.json";
             var obj = new Urls();
-            await Imports.Data.SerializeAsync(path,obj);
+            await Imports.importData.SerializeAsync(path,obj);
 
-            Urls obj2 = await Imports.Data.DeserializeUrlsAsync(path);
+            Urls obj2 = await Imports.importData.DeserializeUrlsAsync(path);
         }
         public static async Task TestMarket()
         {
