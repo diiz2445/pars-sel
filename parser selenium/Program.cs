@@ -22,7 +22,7 @@ namespace parser_selenium
 
            Core.Data data = new Core.Data();
 
-            List<Item> items = Imports.Data.GetItems("CSGODB.json");
+            List<Item> items = Imports.importData.GetItems("CSGODB.json");
             foreach (Item item in items)
             {
                 Dictionary<string,string> values = new Dictionary<string,string>();
@@ -33,7 +33,7 @@ namespace parser_selenium
                 item.SteamURLs = values;
                 
             }
-            Imports.Data.SerializeAsync("CSGODB.json", items);
+            Imports.importData.SerializeAsync("CSGODB.json", items);
             await Test.TestCSGODB();
             await Test.TestCSM();
             await Test.TestBuff();
