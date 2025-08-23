@@ -19,6 +19,9 @@ namespace parser_selenium
     {
         static async Task Main(string[] args)
         {
+            CSGODB_Parse parse = new CSGODB_Parse();
+            await parse.Parse();
+
 
            Core.Data data = new Core.Data();
 

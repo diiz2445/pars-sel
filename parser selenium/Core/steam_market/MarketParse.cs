@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using AngleSharp.Common;
+using Newtonsoft.Json.Serialization;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
 using System;
 using System.Collections.Generic;
@@ -6,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace parser_selenium.Core.steam_market
 {
@@ -115,13 +118,24 @@ namespace parser_selenium.Core.steam_market
         public static string GetURL(string game,Item item, string quality)
         {
             Data data = new Data();
-            string name = $"{item.Name} ({quality})";
+           
+            string name = item.Name;
+            foreach (var keyword in data.Weapons)
+            {
+                // Используем StringComparison для учета или игнорирования регистра
+                if (name.Contains(keyword, StringComparison.OrdinalIgnoreCase))
+                {
+                    name = name.Replace(keyword, $"{keyword} |");
+                }
+            }
+            string name_with_quality = $" ({quality})";
             foreach(var currentReplace in data.URL_Replaces)
             {
-                name = name.Replace(currentReplace.Key, currentReplace.Value);
-            }
+                name_with_quality = name_with_quality.Replace(currentReplace.Key, currentReplace.Value);
 
-            return ($"https://steamcommunity.com/market/listings/{Urls.GameID[game].ToString()}/{name}");
+            }
+            name_with_quality = name + name_with_quality;
+            return ($"https://steamcommunity.com/market/listings/{Urls.GameID[game].ToString()}/{name_with_quality}");
         }
     }
 }

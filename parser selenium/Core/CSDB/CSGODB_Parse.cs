@@ -47,7 +47,7 @@ namespace parser_selenium.Core.CSDB
                 
                 items.Add(item);
             }
-            importData.SerializeAsync("CSGODB.json", items);
+            importData.SerializeAsync("CSGODB_base.json", items);
         }
         public async Task ParseWeapon()
         {
