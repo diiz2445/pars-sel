@@ -22,11 +22,6 @@ namespace parser_selenium
             CSGODB_Parse parse = new CSGODB_Parse();
             await parse.Parse();
 
-
-            Core.Data data = new Core.Data();
-            CSGODB_Parse parse = new CSGODB_Parse("CSGODB.json");
-
-            await parse.AddPrices();
             await Test.TestCSGODB();
             await Test.TestCSM();
             await Test.TestBuff();

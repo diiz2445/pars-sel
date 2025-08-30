@@ -33,7 +33,7 @@ namespace parser_selenium.Core.Buff
                 driver.Url = "https://buff.163.com/market/csgo";
                 List<IWebElement> elements = driver.FindElements(By.XPath("//*[@id=\"j_list_card\"]/ul/li/h3/a")).ToList();
                 string PathFile = "codes.json";
-                try { names = await Imports.Data.DeserializeDictAsync(PathFile); Console.WriteLine("начальная сер пройдено"); }
+                try { names = await Imports.importData.DeserializeDictAsync(PathFile); Console.WriteLine("начальная сер пройдено"); }
                 catch (Exception e) { Console.WriteLine($"Exception: {e.Message}"); }
 
                 foreach (IWebElement element in elements)
@@ -66,7 +66,7 @@ namespace parser_selenium.Core.Buff
                     }
                     //catch { }
                 }
-                await Imports.Data.SerializeAsync(PathFile, names);
+                await Imports.importData.SerializeAsync(PathFile, names);
                 driver.Close();
                 Console.WriteLine($"Count names: {names.Count}");
 

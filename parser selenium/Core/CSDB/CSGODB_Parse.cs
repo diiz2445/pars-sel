@@ -22,7 +22,7 @@ namespace parser_selenium.Core.CSDB
         public CSGODB_Parse() { }
         public CSGODB_Parse(string path)
         {
-            items= Imports.Data.GetItems(path);
+            items= Imports.importData.GetItems(path);
         }
         /// <summary>
         /// Base func for https://www.csgodatabase.com/skins/
@@ -50,7 +50,7 @@ namespace parser_selenium.Core.CSDB
                 
                 items.Add(item);
             }
-            Imports.Data.SerializeAsync("CSGODB.json", items);
+            Imports.importData.SerializeAsync("CSGODB.json", items);
         }
         
         public async Task ReworkNames()
@@ -60,7 +60,7 @@ namespace parser_selenium.Core.CSDB
             {
                 item.Name = InsertPipeAfterMatches(item.Name, data.Weapons);
             }
-            await Imports.Data.SerializeAsync("CSGODB.json", items);
+            await Imports.importData.SerializeAsync("CSGODB.json", items);
         }
         public static string InsertPipeAfterMatches(string input, List<string> patterns)
         {
@@ -105,7 +105,7 @@ namespace parser_selenium.Core.CSDB
         public async Task AddSteamURL()
         {
             Data data = new Data();
-            List<Item> items = Imports.Data.GetItems("CSGODB.json");
+            List<Item> items = Imports.importData.GetItems("CSGODB.json");
             foreach (Item item in items)
             {
                 Dictionary<string, string> values = new Dictionary<string, string>();
@@ -116,7 +116,7 @@ namespace parser_selenium.Core.CSDB
                 item.SteamURLs = values;
 
             }
-            await Imports.Data.SerializeAsync("CSGODB.json", items);
+            await Imports.importData.SerializeAsync("CSGODB.json", items);
         }
         public async Task AddPrices()
         {
@@ -136,7 +136,7 @@ namespace parser_selenium.Core.CSDB
                     catch(Exception e) { Console.WriteLine($"already taken or Ex: {e.Message}"); }
                     
                 }
-                await Imports.Data.SerializeAsync("CSGODB.json", items);
+                await Imports.importData.SerializeAsync("CSGODB.json", items);
                 Thread.Sleep(40000);
             }
             
