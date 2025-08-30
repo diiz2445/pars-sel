@@ -19,7 +19,7 @@ namespace parser_selenium
     {
         static async Task Main(string[] args)
         {
-            
+
             await Test.TestCSGODB();
             await Test.TestCSM();
             await Test.TestBuff();

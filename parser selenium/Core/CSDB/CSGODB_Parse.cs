@@ -87,6 +87,7 @@ namespace parser_selenium.Core.CSDB
             }
 
             return result.ToString();
+
         }
         public async Task ParseWeapon()
         {

@@ -1,8 +1,8 @@
+
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.DevTools;
 using OpenQA.Selenium.DevTools.V138.Network;
-
 using OpenQA.Selenium.Edge;
 using System;
 using System.Collections.Generic;
@@ -177,6 +177,7 @@ namespace parser_selenium.Core.steam_market
             };
             driver.Navigate().Refresh();
             while (driver.SessionId!=null) { }
+
         }
     }
 }

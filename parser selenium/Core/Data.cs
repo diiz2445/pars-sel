@@ -98,7 +98,9 @@ namespace parser_selenium.Core
         
         public Data()
         {
+
             items = Imports.importData.GetItems("CSGODB_base.json");
+
         }
     }
     internal class Item
