@@ -39,7 +39,7 @@ namespace parser_selenium.Core.CSDB
                 Item item = new Item();
                 IWebElement[] tmp = element.FindElements(By.TagName("td")).ToArray();
                 
-                item.Name = InsertPipeAfterMatches( tmp[0].Text,data.Weapons);
+                item.Name = tmp[0].Text;
                 item.Rarity = tmp[1].Text;
                 item.Collection = tmp[2].Text;
                 item.Introduced = tmp[3].Text;
