@@ -19,44 +19,50 @@ namespace parser_selenium
     {
         static async Task Main(string[] args)
         {
-
-           Core.Data data = new Core.Data();
-
-            List<Item> items = Imports.importData.GetItems("CSGODB.json");
-            foreach (Item item in items)
+            using (var request = new HTTPRequest())
             {
-                Dictionary<string,string> values = new Dictionary<string,string>();
-                foreach (string quality in data.quality)
-                {
-                    values.Add(quality, MarketParse.GetURL("CS", item, quality));
-                }
-                item.SteamURLs = values;
-                
+                string url = "https://steamcommunity.com/market/listings/730/Gamma%202%20Case";
+                string apiUrl = request.GetRequestUrl(url, "itemordershistogram");
+                Console.WriteLine(apiUrl);
             }
-            Imports.importData.SerializeAsync("CSGODB.json", items);
-            await Test.TestCSGODB();
-            await Test.TestCSM();
-            await Test.TestBuff();
-            HttpClient httpClient = new HttpClient();
-            Uri.TryCreate("https://www.steamwebapi.com/steam/api/item?key=OTWUI9X5EHED2V39&market_hash_name=AK-47%20%7C%20Redline%20(Field-Tested)",0,out Uri result);
-            httpClient.BaseAddress = result;
+
+            /*Core.Data data = new Core.Data();
+
+             List<Item> items = Imports.importData.GetItems("CSGODB.json");
+             foreach (Item item in items)
+             {
+                 Dictionary<string,string> values = new Dictionary<string,string>();
+                 foreach (string quality in data.quality)
+                 {
+                     values.Add(quality, MarketParse.GetURL("CS", item, quality));
+                 }
+                 item.SteamURLs = values;
+
+             }
+             Imports.importData.SerializeAsync("CSGODB.json", items);
+             await Test.TestCSGODB();
+             await Test.TestCSM();
+             await Test.TestBuff();
+             HttpClient httpClient = new HttpClient();
+             Uri.TryCreate("https://www.steamwebapi.com/steam/api/item?key=OTWUI9X5EHED2V39&market_hash_name=AK-47%20%7C%20Redline%20(Field-Tested)",0,out Uri result);
+             httpClient.BaseAddress = result;
 
 
-            //HttpResponseMessage response = await httpClient.GetAsync("https://www.steamwebapi.com/steam/api/item?key=OTWUI9X5EHED2V39&market_hash_name=AK-47%20%7C%20Redline%20(Field-Tested)");
-            //string msg = await response.Content.ReadAsStringAsync();
-            //Console.WriteLine($"{msg}");
-            //item_info_CS info= JsonConvert.DeserializeObject<item_info_CS>(msg);
-            //Console.WriteLine(info);
-            
+             //HttpResponseMessage response = await httpClient.GetAsync("https://www.steamwebapi.com/steam/api/item?key=OTWUI9X5EHED2V39&market_hash_name=AK-47%20%7C%20Redline%20(Field-Tested)");
+             //string msg = await response.Content.ReadAsStringAsync();
+             //Console.WriteLine($"{msg}");
+             //item_info_CS info= JsonConvert.DeserializeObject<item_info_CS>(msg);
+             //Console.WriteLine(info);
 
 
-            //WebRequest request = WebRequest.Create("https://www.steamwebapi.com/steam/api/item?key=OTWUI9X5EHED2V39&market_hash_name=AK-47%20%7C%20Redline%20(Field-Tested)");
-            //WebResponse response = request.GetResponse();
-            //StreamReader reader = new StreamReader(response.GetResponseStream());
-            //string responseText = reader.ReadToEnd();
-            //item_info item = JsonConvert.DeserializeObject<item_info>(responseText);
-            Console.ReadLine();
-            
+
+             //WebRequest request = WebRequest.Create("https://www.steamwebapi.com/steam/api/item?key=OTWUI9X5EHED2V39&market_hash_name=AK-47%20%7C%20Redline%20(Field-Tested)");
+             //WebResponse response = request.GetResponse();
+             //StreamReader reader = new StreamReader(response.GetResponseStream());
+             //string responseText = reader.ReadToEnd();
+             //item_info item = JsonConvert.DeserializeObject<item_info>(responseText);
+             Console.ReadLine();*/
+
         }
     }
 }
