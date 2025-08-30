@@ -66,5 +66,14 @@ namespace parser_selenium.Tests
             Console.WriteLine(MarketParse.GetURL("CS", data.items[0], data.quality[0]));
         }
 
+        public static void TestGetHTTPMethod()
+        {
+            using (var request = new HTTPRequest())
+            {
+                string url = "https://steamcommunity.com/market/listings/730/Gamma%202%20Case";
+                string apiUrl = request.GetRequestUrl(url, "itemordershistogram");
+                Console.WriteLine(apiUrl);
+            }
+        }
     }
 }

@@ -19,12 +19,7 @@ namespace parser_selenium
     {
         static async Task Main(string[] args)
         {
-            using (var request = new HTTPRequest())
-            {
-                string url = "https://steamcommunity.com/market/listings/730/Gamma%202%20Case";
-                string apiUrl = request.GetRequestUrl(url, "itemordershistogram");
-                Console.WriteLine(apiUrl);
-            }
+            Test.TestGetHTTPMethod();
 
             /*Core.Data data = new Core.Data();
 
