@@ -19,24 +19,7 @@ namespace parser_selenium
     {
         static async Task Main(string[] args)
         {
-            CSGODB_Parse parse = new CSGODB_Parse();
-            await parse.Parse();
 
-
-           Core.Data data = new Core.Data();
-
-            List<Item> items = Imports.importData.GetItems("CSGODB.json");
-            foreach (Item item in items)
-            {
-                Dictionary<string,string> values = new Dictionary<string,string>();
-                foreach (string quality in data.quality)
-                {
-                    values.Add(quality, MarketParse.GetURL("CS", item, quality));
-                }
-                item.SteamURLs = values;
-                
-            }
-            Imports.importData.SerializeAsync("CSGODB.json", items);
             await Test.TestCSGODB();
             await Test.TestCSM();
             await Test.TestBuff();
