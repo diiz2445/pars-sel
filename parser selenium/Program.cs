@@ -25,8 +25,8 @@ namespace parser_selenium
             ChromeDriver chromeDriver = new ChromeDriver();
 
             string url = "https://steamcommunity.com/market/listings/730/Gamma%202%20Case";
-            chromeDriver.Url = url;
-            hTTPRequest.ListenRequests(chromeDriver);
+            chromeDriver.Navigate().GoToUrl(url);
+            HTTPRequest.ListenRequests(ref chromeDriver);
             //Test.TestGetHTTPMethod();
 
             /*Core.Data data = new Core.Data();

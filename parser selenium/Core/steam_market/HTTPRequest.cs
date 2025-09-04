@@ -8,10 +8,10 @@ using System.Collections.Generic;
 
 namespace parser_selenium.Core.steam_market
 {
-    internal class HTTPRequest // : IDisposable
+    internal class HTTPRequest : IDisposable
     {
 
-        public static void ListenRequests(ChromeDriver driver)
+        public static void ListenRequests(ref ChromeDriver driver)
         {
             // Получаем сессию DevTools
             DevToolsSession devToolsSession = driver.GetDevToolsSession();
@@ -31,7 +31,7 @@ namespace parser_selenium.Core.steam_market
             while (driver.SessionId != null) { }
 
         }
-        /* private readonly IWebDriver driver;
+         private readonly IWebDriver driver;
 
          public HTTPRequest()
          {
@@ -103,11 +103,11 @@ namespace parser_selenium.Core.steam_market
                  return null;
              }
          }
-
+        
          public void Dispose()
          {
              driver?.Quit();
              driver?.Dispose();
-         }*/
+         }
     }
 }
