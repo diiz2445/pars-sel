@@ -1,17 +1,19 @@
-﻿using OpenQA.Selenium;
+﻿using Newtonsoft.Json;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
+using parser_selenium.Core;
+using parser_selenium.Core.CSDB;
+using parser_selenium.Core.steam_market;
+using parser_selenium.Imports;
+using parser_selenium.Tests;
+using parser_selenium.TG_BOT;
 using System.Net;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using parser_selenium.Core.steam_market;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using parser_selenium.Tests;
-using parser_selenium.Core;
-using parser_selenium.TG_BOT;
-using System.Security.Cryptography.X509Certificates;
-using parser_selenium.Core.CSDB;
-using parser_selenium.Imports;
+using static System.Net.WebRequestMethods;
 
 namespace parser_selenium
 {
@@ -19,7 +21,13 @@ namespace parser_selenium
     {
         static async Task Main(string[] args)
         {
-            Test.TestGetHTTPMethod();
+            HTTPRequest hTTPRequest = new HTTPRequest();
+            ChromeDriver chromeDriver = new ChromeDriver();
+
+            string url = "https://steamcommunity.com/market/listings/730/Gamma%202%20Case";
+            chromeDriver.Url = url;
+            hTTPRequest.ListenRequests(chromeDriver);
+            //Test.TestGetHTTPMethod();
 
             /*Core.Data data = new Core.Data();
 
