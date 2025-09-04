@@ -1,4 +1,8 @@
+
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.DevTools;
+using OpenQA.Selenium.DevTools.V138.Network;
 using OpenQA.Selenium.Edge;
 using System;
 using System.Collections.Generic;
@@ -6,6 +10,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace parser_selenium.Core.steam_market
 {
@@ -67,6 +72,26 @@ namespace parser_selenium.Core.steam_market
             
             return items;
         }
+        public static double ParseSellPrice(string url, IWebDriver driver)//Парсинг одной страницы на маркете 
+        {
+
+            driver.Url = url;
+            Thread.Sleep(500);
+            
+            string Price = "";
+            IWebElement elementForSell;
+            while (driver.FindElement(By.XPath("//*[@id=\"mainContents\"]/h2")) == null)
+                Thread.Sleep(40000);
+            try { elementForSell = driver.FindElement(By.XPath("//*[@id=\"market_commodity_buyrequests\"]/span[2]")); Price = elementForSell.Text.Split(' ')[0].Remove(0, 1).Replace('.',',');}
+            catch 
+            {
+                try { elementForSell = driver.FindElement(By.XPath("//*[@id=\"market_commodity_forsale_table\"]/table/tbody/tr[1]")); Price = elementForSell.Text.Split(' ')[0].Remove(0, 1).Replace('.', ','); }
+                catch { Price = "-1"; }
+            }
+            
+            
+            return Convert.ToDouble(Price);
+        }
         public async Task<string> GetNotifyAllItemsString()
         {
             Console.WriteLine("Start GetNotify");
@@ -115,13 +140,44 @@ namespace parser_selenium.Core.steam_market
         public static string GetURL(string game,Item item, string quality)
         {
             Data data = new Data();
-            string name = $"{item.Name} ({quality})";
+           
+            string name = item.Name;
+            foreach (var keyword in data.Weapons)
+            {
+                // Используем StringComparison для учета или игнорирования регистра
+                if (name.Contains(keyword, StringComparison.OrdinalIgnoreCase))
+                {
+                    name = name.Replace(keyword, $"{keyword} |");
+                }
+            }
+            string name_with_quality = $" ({quality})";
             foreach(var currentReplace in data.URL_Replaces)
             {
-                name = name.Replace(currentReplace.Key, currentReplace.Value);
-            }
+                name_with_quality = name_with_quality.Replace(currentReplace.Key, currentReplace.Value);
 
-            return ($"https://steamcommunity.com/market/listings/{Urls.GameID[game].ToString()}/{name}");
+            }
+            name_with_quality = name + name_with_quality;
+            return ($"https://steamcommunity.com/market/listings/{Urls.GameID[game].ToString()}/{name_with_quality}");
+        }
+        public static void ListenRequests(ref ChromeDriver driver)
+        {
+            // Получаем сессию DevTools
+            DevToolsSession devToolsSession = driver.GetDevToolsSession();
+
+            // Получаем объект Network из версии протокола
+            var network = devToolsSession.GetVersionSpecificDomains<OpenQA.Selenium.DevTools.V138.DevToolsSessionDomains>().Network;
+
+            // Включаем домен Network (активируем перехват сетевых запросов)
+            network.Enable(new EnableCommandSettings());
+
+            //Подписка на события реквестов
+            network.RequestWillBeSent += (sender, e) =>
+            {
+                Console.WriteLine("URL запроса: " + e.Request.Url);
+            };
+            driver.Navigate().Refresh();
+            while (driver.SessionId!=null) { }
+
         }
     }
 }
